@@ -31,7 +31,7 @@ export function Accordion({ children, title }) {
           </svg>
         </button>
       </div>
-      <div className="accordion-content">{children}</div>
+      <div className="accordion-content hide">{children}</div>
     </div>
   );
 }
