@@ -39,6 +39,7 @@
 .field-title button {
   border: none;
   background-color: transparent;
+  transition: transform 300ms ease-in-out;
 }
 
 .field-title button:hover {
