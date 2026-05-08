@@ -1,4 +1,4 @@
-/* ### AUXILIARY CLASSES ### */
+/* ### UTILITY CLASSES ### */
 
 .hide {
   display: none;
@@ -10,6 +10,23 @@
 
 .accordion-opened {
   transform: rotate(270deg);
+}
+
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 2rem;
+}
+
+.accordion-container svg {
+  width: 20px;
+}
+
+.accordion-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* ### FORM SECTION ### */
@@ -64,6 +81,10 @@ form label {
 form input {
   width: 100%;
   padding: 0.4rem 0.6rem;
+}
+
+form > button {
+  padding: 0.4rem 1rem;
 }
 
 .date-inputs-container {
