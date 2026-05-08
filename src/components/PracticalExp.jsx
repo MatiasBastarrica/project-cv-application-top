@@ -1,8 +1,16 @@
 export function PracticalExp() {
   return (
     <div className="cv-form-field">
-      <h2>Practical experience</h2>
-      <form action="#">
+      <div className="field-title">
+        <h2>Practical experience</h2>
+        <button type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>Expand form field</title>
+            <path d="M5.5,4.14L4.5,5.86L15,12L4.5,18.14L5.5,19.86L19,12L5.5,4.14Z" />
+          </svg>
+        </button>
+      </div>
+      <form action="#" className="hide">
         <div>
           <label htmlFor="name">Company name</label>
           <input type="text" id="name" />
