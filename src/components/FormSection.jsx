@@ -4,10 +4,12 @@ import { PracticalExp } from "./PracticalExp.jsx";
 export function FormSection() {
   return (
     <>
-      <h1>CV Generator</h1>
-      <GralInfo></GralInfo>
-      <EdExp></EdExp>
-      <PracticalExp></PracticalExp>
+      <div className="form-section">
+        <h1>CV Generator</h1>
+        <GralInfo></GralInfo>
+        <EdExp></EdExp>
+        <PracticalExp></PracticalExp>
+      </div>
     </>
   );
 }

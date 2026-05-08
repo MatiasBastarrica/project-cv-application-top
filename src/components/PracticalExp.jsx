@@ -15,11 +15,15 @@ export function PracticalExp() {
           <label htmlFor="phone">Main responsabilities</label>
           <input type="number" name="phone" id="phone" />
         </div>
-        <div>
-          <label htmlFor="work-start-date">Start date</label>
-          <input type="date" name="work-start-date" id="work-start-date" />
-          <label htmlFor="work-end-date">End date</label>
-          <input type="date" name="work-end-date" id="work-end-date" />
+        <div className="date-inputs-container">
+          <div>
+            <label htmlFor="work-start-date">Start date</label>
+            <input type="date" name="work-start-date" id="work-start-date" />
+          </div>
+          <div>
+            <label htmlFor="work-end-date">End date</label>
+            <input type="date" name="work-end-date" id="work-end-date" />
+          </div>
         </div>
       </form>
     </div>

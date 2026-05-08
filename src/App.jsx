@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FormSection } from "../src/components/FormSection.jsx";
 // example of how to import assets
 // import reactLogo from './assets/react.svg'
 
@@ -7,7 +8,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <FormSection></FormSection>
     </>
   );
 }

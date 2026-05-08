@@ -11,11 +11,15 @@ export function EdExp() {
           <label htmlFor="title-of-study">Title of study</label>
           <input type="text" name="title-of-study" id="title-of-study" />
         </div>
-        <div>
-          <label htmlFor="ed-start-date">Start date</label>
-          <input type="date" name="ed-start-date" id="ed-start-date" />
-          <label htmlFor="ed-end-date">End date</label>
-          <input type="date" name="ed-end-date" id="ed-end-date" />
+        <div className="date-inputs-container">
+          <div>
+            <label htmlFor="ed-start-date">Start date</label>
+            <input type="date" name="ed-start-date" id="ed-start-date" />
+          </div>
+          <div>
+            <label htmlFor="ed-end-date">End date</label>
+            <input type="date" name="ed-end-date" id="ed-end-date" />
+          </div>
         </div>
       </form>
     </div>
