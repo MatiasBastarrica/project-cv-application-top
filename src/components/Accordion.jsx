@@ -5,7 +5,7 @@ export function Accordion({ children, title }) {
 
   function handleAccordion(e) {
     const btn = e.currentTarget;
-    const accordionContent = document.querySelector(".accordion-content");
+    const accordionContent = btn.parentElement.nextSibling;
     accordionContent.classList.toggle("hide");
     if (!openAccordion) {
       btn.classList.remove("accordion-closed");
