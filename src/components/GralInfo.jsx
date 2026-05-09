@@ -15,7 +15,6 @@ export function GralInfo() {
     submission.email = document.querySelector("#email").value;
     submission.phone = document.querySelector("#phone").value;
     setSubmission({ ...submission, submitted: true });
-    console.log(submission);
   }
 
   function handleEdit(e) {
