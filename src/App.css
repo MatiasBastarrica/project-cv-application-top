@@ -80,7 +80,8 @@
   height: auto;
 }
 
-form {
+form,
+.form-values-display {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -95,7 +96,8 @@ form input {
   padding: 0.4rem 0.6rem;
 }
 
-form > button {
+form > button,
+.edit-button {
   padding: 0.4rem 1rem;
 }
 
