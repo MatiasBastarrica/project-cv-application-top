@@ -1,60 +1,104 @@
 import { useState } from "react";
+import { Accordion } from "./Accordion.jsx";
 
 export function PracticalExp() {
-  const [openAccordion, setOpenAccordion] = useState(false);
+  const [submission, setSubmission] = useState({
+    submitted: false,
+    companyName: "",
+    positionTitle: "",
+    mainResponsabilities: "",
+    startDate: "",
+    endDate: "",
+  });
 
-  function handleAccordion(e) {
-    const formElement = document.querySelector(".practical-exp-form");
-    const btn = e.currentTarget;
-    formElement.classList.toggle("hide");
-    if (!openAccordion) {
-      btn.classList.remove("accordion-closed");
-      btn.classList.add("accordion-opened");
-    } else {
-      btn.classList.add("accordion-closed");
-      btn.classList.remove("accordion-opened");
-    }
-    setOpenAccordion(!openAccordion);
+  function handleSubmit(e) {
+    e.preventDefault();
+    submission.companyName = document.querySelector("#company-name").value;
+    submission.positionTitle = document.querySelector("#position-title").value;
+    submission.mainResponsabilities = document.querySelector(
+      "#main-responsabilities",
+    ).value;
+    submission.startDate = document.querySelector("#work-start-date").value;
+    submission.endDate = document.querySelector("#work-end-date").value;
+    setSubmission({ ...submission, submitted: true });
   }
+
+  function handleEdit(e) {
+    setSubmission({ ...submission, submitted: false });
+  }
+
+  function childrenElements() {
+    if (!submission.submitted) {
+      return (
+        <form action="#" className=" practical-exp-form">
+          <div>
+            <label htmlFor="company-name">Company name</label>
+            <input
+              type="text"
+              id="company-name"
+              defaultValue={submission.companyName}
+            />
+          </div>
+          <div>
+            <label htmlFor="position-title">Position title</label>
+            <input
+              type="text"
+              name="position-title"
+              id="position-title"
+              defaultValue={submission.positionTitle}
+            />
+          </div>
+          <div>
+            <label htmlFor="main-responsabilities">Main responsabilities</label>
+            <input
+              type="text"
+              name="main-responsabilities"
+              id="main-responsabilities"
+              defaultValue={submission.mainResponsabilities}
+            />
+          </div>
+          <div className="date-inputs-container">
+            <div>
+              <label htmlFor="work-start-date">Start date</label>
+              <input
+                type="date"
+                name="work-start-date"
+                id="work-start-date"
+                defaultValue={submission.startDate}
+              />
+            </div>
+            <div>
+              <label htmlFor="work-end-date">End date</label>
+              <input
+                type="date"
+                name="work-end-date"
+                id="work-end-date"
+                defaultValue={submission.endDate}
+              />
+            </div>
+          </div>
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        </form>
+      );
+    } else {
+      return (
+        <div className="form-values-display">
+          <p>Company name: {submission.companyName}</p>
+          <p>Position title: {submission.positionTitle}</p>
+          <p>Main responsabilities: {submission.mainResponsabilities}</p>
+          <p>Start date: {submission.startDate}</p>
+          <p>End date: {submission.endDate}</p>
+          <button type="button" className="edit-button" onClick={handleEdit}>
+            Edit
+          </button>
+        </div>
+      );
+    }
+  }
+
   return (
-    <div className="cv-form-field">
-      <div className="field-title">
-        <h2>Practical experience</h2>
-        <button
-          type="button"
-          className="accordion-closed"
-          onClick={handleAccordion}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <title>Expand form field</title>
-            <path d="M5.5,4.14L4.5,5.86L15,12L4.5,18.14L5.5,19.86L19,12L5.5,4.14Z" />
-          </svg>
-        </button>
-      </div>
-      <form action="#" className="hide practical-exp-form">
-        <div>
-          <label htmlFor="name">Company name</label>
-          <input type="text" id="name" />
-        </div>
-        <div>
-          <label htmlFor="email">Position title</label>
-          <input type="email" name="email" id="email" />
-        </div>
-        <div>
-          <label htmlFor="phone">Main responsabilities</label>
-          <input type="number" name="phone" id="phone" />
-        </div>
-        <div className="date-inputs-container">
-          <div>
-            <label htmlFor="work-start-date">Start date</label>
-            <input type="date" name="work-start-date" id="work-start-date" />
-          </div>
-          <div>
-            <label htmlFor="work-end-date">End date</label>
-            <input type="date" name="work-end-date" id="work-end-date" />
-          </div>
-        </div>
-      </form>
-    </div>
+    <Accordion title={"Practical experience"}>{childrenElements()}</Accordion>
   );
 }
