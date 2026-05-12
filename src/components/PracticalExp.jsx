@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Accordion } from "./Accordion.jsx";
 
-export function PracticalExp() {
+export function PracticalExp({ previewData, updatePreviewData }) {
   const [submission, setSubmission] = useState({
     submitted: false,
     companyName: "",
@@ -21,6 +21,14 @@ export function PracticalExp() {
     submission.startDate = document.querySelector("#work-start-date").value;
     submission.endDate = document.querySelector("#work-end-date").value;
     setSubmission({ ...submission, submitted: true });
+    updatePreviewData({
+      ...previewData,
+      companyName: submission.companyName,
+      positionTitle: submission.positionTitle,
+      mainResponsabilities: submission.mainResponsabilities,
+      workStartDate: submission.startDate,
+      workEndDate: submission.endDate,
+    });
   }
 
   function handleEdit(e) {

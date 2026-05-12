@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Accordion } from "./Accordion.jsx";
 
-export function GralInfo() {
+export function GralInfo({ previewData, updatePreviewData }) {
   const [submission, setSubmission] = useState({
     submitted: false,
     name: "",
@@ -15,6 +15,12 @@ export function GralInfo() {
     submission.email = document.querySelector("#email").value;
     submission.phone = document.querySelector("#phone").value;
     setSubmission({ ...submission, submitted: true });
+    updatePreviewData({
+      ...previewData,
+      name: submission.name,
+      email: submission.email,
+      phone: submission.phone,
+    });
   }
 
   function handleEdit(e) {

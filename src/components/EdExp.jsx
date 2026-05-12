@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Accordion } from "./Accordion.jsx";
 
-export function EdExp() {
+export function EdExp({ previewData, updatePreviewData }) {
   const [submission, setSubmission] = useState({
     submitted: false,
     schoolName: "",
@@ -17,6 +17,13 @@ export function EdExp() {
     submission.startDate = document.querySelector("#ed-start-date").value;
     submission.endDate = document.querySelector("#ed-end-date").value;
     setSubmission({ ...submission, submitted: true });
+    updatePreviewData({
+      ...previewData,
+      schoolName: submission.schoolName,
+      titleOfStudy: submission.titleOfStudy,
+      edStartDate: submission.startDate,
+      edEndDate: submission.endDate,
+    });
   }
 
   function handleEdit(e) {
