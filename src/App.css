@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
 }
 
 .accordion-title button {
@@ -39,6 +40,13 @@
 
 .accordion-title button:hover {
   cursor: pointer;
+}
+
+/* ### ROOT ### */
+
+#root {
+  display: flex;
+  align-items: center;
 }
 
 /* ### FORM SECTION ### */
@@ -106,4 +114,32 @@ form > button,
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+/* ### PREVIEW SECTION ### */
+
+.preview-section {
+  box-shadow: var(--shadow);
+  /* flex-grow: 1; */
+  width: 60%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preview-name {
+  text-align: center;
+}
+
+.data-item {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.preview-personal-details {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
