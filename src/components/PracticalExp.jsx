@@ -38,12 +38,11 @@ export function PracticalExp({ previewData, updatePreviewData }) {
         </div>
         <div>
           <label htmlFor="main-responsabilities">Main responsabilities</label>
-          <input
-            type="text"
+          <textarea
             name="main-responsabilities"
             id="main-responsabilities"
             defaultValue={items[index].mainResponsabilities}
-          />
+          ></textarea>
         </div>
         <div className="date-inputs-container">
           <div>
