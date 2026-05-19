@@ -12,10 +12,15 @@ export function PreviewSection({ info }) {
   //   return text;
   // }
 
+  function formatDate(dateString) {
+    const textArr = dateString.split("-");
+    return textArr.join("/");
+  }
+
   function dateContent(startDate, endDate) {
     let text = "";
-    startDate ? (text += `From ${startDate}`) : null;
-    endDate ? (text += ` to ${endDate}`) : null;
+    startDate ? (text += `${formatDate(startDate)}`) : null;
+    endDate ? (text += ` - ${formatDate(endDate)}`) : null;
     return text;
   }
 
