@@ -153,8 +153,19 @@ form > button,
   gap: 1rem;
 }
 
+.preview-intro svg {
+  width: 20px;
+}
+
 .preview-name {
   text-align: center;
+}
+
+.preview-email,
+.preview-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .data-item {
