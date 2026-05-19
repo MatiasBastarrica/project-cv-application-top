@@ -8,7 +8,13 @@ import { PreviewSection } from "./components/PreviewSection.jsx";
 import "./App.css";
 
 function App() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    name: null,
+    email: null,
+    phone: null,
+    educationItems: [],
+    practicalItems: [],
+  });
   return (
     <>
       <FormSection

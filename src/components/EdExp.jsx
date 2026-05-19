@@ -115,6 +115,11 @@ export function EdExp({ previewData, updatePreviewData }) {
     newItems[index].endDate = document.querySelector("#ed-end-date").value;
 
     setItems([...newItems]);
+
+    updatePreviewData({
+      ...previewData,
+      educationItems: newItems,
+    });
   }
 
   function handleEdit(e) {

@@ -130,6 +130,11 @@ export function PracticalExp({ previewData, updatePreviewData }) {
     newItems[index].endDate = document.querySelector("#work-end-date").value;
 
     setItems([...newItems]);
+
+    updatePreviewData({
+      ...previewData,
+      practicalItems: newItems,
+    });
   }
 
   function handleEdit(e) {

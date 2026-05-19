@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 export function PreviewSection({ info }) {
-  function edDateContent() {
-    let text = "";
-    if (info.edStartDate) {
-      text += info.edStartDate;
-    }
-    if (info.edEndDate) {
-      text += ` to ${info.edEndDate}`;
-    }
-    return text;
-  }
+  // function edDateContent() {
+  //   let text = "";
+  //   if (info.edStartDate) {
+  //     text += info.edStartDate;
+  //   }
+  //   if (info.edEndDate) {
+  //     text += ` to ${info.edEndDate}`;
+  //   }
+  //   return text;
+  // }
 
   function dateContent(startDate, endDate) {
     let text = "";
@@ -18,33 +18,58 @@ export function PreviewSection({ info }) {
     endDate ? (text += ` to ${endDate}`) : null;
     return text;
   }
+
+  function children(type) {
+    let listItems;
+
+    if (type === "ed") {
+      listItems = info.educationItems.map((item, index) => {
+        return (
+          <div className="data-item" key={index}>
+            <div className="date-container">
+              <p>{dateContent(item.startDate, item.endDate)}</p>
+            </div>
+            <div className="data-content">
+              <h4 className="data-title">{item.schoolName}</h4>
+              <p className="data-subtitle ">{item.titleOfStudy}</p>
+            </div>
+          </div>
+        );
+      });
+    } else {
+      listItems = info.practicalItems.map((item, index) => {
+        return (
+          <div className="data-item" key={index}>
+            <div className="date-container">
+              <p>{dateContent(item.startDate, item.endDate)}</p>
+            </div>
+            <div className="data-content">
+              <h4 className="data-title">{item.companyName}</h4>
+              <p className="data-subtitle ">{item.positionTitle}</p>
+              <p className="data-desc">{item.mainResponsabilities}</p>
+            </div>
+          </div>
+        );
+      });
+    }
+
+    return <>{listItems}</>;
+  }
+
   return (
     <div className="preview-section">
-      <h2 className="preview-name">{info.name && info.name}</h2>
-      <div className="preview-personal-details">
-        <span className="preview-email">{info.email && info.email}</span>
-        <span className="preview-phone">{info.phone && info.phone}</span>
-      </div>
-      <h3 className="preview-ed-exp">Educational experience</h3>
-      <div className="data-item">
-        <div className="date-container">
-          <p>{dateContent(info.edStartDate, info.edEndDate)}</p>
-        </div>
-        <div className="data-content">
-          <h4 className="data-title">{info.schoolName}</h4>
-          <p className="data-subtitle ">{info.titleOfStudy}</p>
+      <div className="preview-intro">
+        <h2 className="preview-name">{info.name && info.name}</h2>
+        <div className="preview-personal-details">
+          <span className="preview-email">{info.email && info.email}</span>
+          <span className="preview-phone">{info.phone && info.phone}</span>
         </div>
       </div>
-      <h3 className="preview-ed-exp">Practical experience</h3>
-      <div className="data-item">
-        <div className="date-container">
-          <p>{dateContent(info.workStartDate, info.workEndDate)}</p>
-        </div>
-        <div className="data-content">
-          <h4 className="data-title">{info.companyName}</h4>
-          <p className="data-subtitle ">{info.positionTitle}</p>
-          <p className="data-desc">{info.mainResponsabilities}</p>
-        </div>
+      <div className="preview-main">
+        <h3 className="preview-ed-exp">Educational experience</h3>
+        {children("ed")}
+        <h3 className="preview-ed-exp">Practical experience</h3>
+        {children("pr")}
       </div>
     </div>
   );
