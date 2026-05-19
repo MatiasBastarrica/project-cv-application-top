@@ -112,7 +112,8 @@ form input {
 
 form > button,
 .edit-button,
-.add-more {
+.add-more,
+.remove-button {
   padding: 0.4rem 1rem;
 }
 
