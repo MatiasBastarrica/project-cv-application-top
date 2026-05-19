@@ -77,13 +77,24 @@ export function EdExp({ previewData, updatePreviewData }) {
         >
           Edit
         </button>
+        <button
+          type="button"
+          data-item-count={index}
+          className="remove-button"
+          onClick={handleRemove}
+        >
+          Remove
+        </button>
       </div>
     );
   }
 
-  function getUpdatedItems(e, isSubmitted, isNew, index) {
+  function getUpdatedItems(e, isSubmitted, isNew, isRemoved, index) {
     const newItems = [...items];
-    if (!isNew) {
+
+    if (isRemoved) {
+      newItems.splice(index, 1);
+    } else if (!isNew) {
       const updatedItem = { ...items[index], submitted: isSubmitted };
       newItems.splice(index, 1, updatedItem);
     } else {
@@ -95,7 +106,7 @@ export function EdExp({ previewData, updatePreviewData }) {
   function handleSubmit(e) {
     e.preventDefault();
     const index = e.target.dataset.itemCount;
-    const newItems = getUpdatedItems(e, true, false, index);
+    const newItems = getUpdatedItems(e, true, false, false, index);
 
     newItems[index].schoolName = document.querySelector("#school-name").value;
     newItems[index].titleOfStudy =
@@ -108,14 +119,19 @@ export function EdExp({ previewData, updatePreviewData }) {
 
   function handleEdit(e) {
     const index = e.target.dataset.itemCount;
-    const newItems = getUpdatedItems(e, false, false, index);
+    const newItems = getUpdatedItems(e, false, false, false, index);
     setItems([...newItems]);
   }
 
   function handleAddMore(e) {
-    const newItems = getUpdatedItems(e, null, true);
+    const newItems = getUpdatedItems(e, null, true, false);
     setItems([...newItems]);
-    // const
+  }
+
+  function handleRemove(e) {
+    const index = e.target.dataset.itemCount;
+    const newItems = getUpdatedItems(e, null, false, true, index);
+    setItems([...newItems]);
   }
 
   function getItem(item, keyNum) {
