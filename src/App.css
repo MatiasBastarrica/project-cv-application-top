@@ -131,7 +131,22 @@ form > button,
   box-shadow: var(--shadow);
   /* flex-grow: 1; */
   width: 60%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-self: flex-start;
+  margin-top: 6rem;
+  /* background-color: pink; */
+}
+
+.preview-intro,
+.preview-main {
   padding: 1.5rem;
+}
+
+.preview-intro {
+  background-color: antiquewhite;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -151,4 +166,15 @@ form > button,
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+
+.preview-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preview-main h3 {
+  padding: 0.4rem 1.5rem;
+  background-color: antiquewhite;
 }
