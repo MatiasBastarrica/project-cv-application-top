@@ -105,7 +105,8 @@ form label {
   display: block;
 }
 
-form input {
+form input,
+textarea {
   width: 100%;
   padding: 0.4rem 0.6rem;
 }
