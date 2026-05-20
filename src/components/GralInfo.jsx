@@ -11,16 +11,41 @@ export function GralInfo({ previewData, updatePreviewData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    submission.name = document.querySelector("#name").value;
-    submission.email = document.querySelector("#email").value;
-    submission.phone = document.querySelector("#phone").value;
-    setSubmission({ ...submission, submitted: true });
-    updatePreviewData({
-      ...previewData,
-      name: submission.name,
-      email: submission.email,
-      phone: submission.phone,
-    });
+    const inputs = [
+      document.querySelector("#name"),
+      document.querySelector("#email"),
+      document.querySelector("#phone"),
+    ];
+
+    if (!document.querySelector(".gral-info-form").checkValidity()) {
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+
+        if (input.validity.valueMissing) {
+          input.setCustomValidity("Please fill out this field");
+        } else if (input.validity.typeMismatch) {
+          console.log("mismatch");
+          input.setCustomValidity("Please adhere to the format");
+        } else {
+          input.setCustomValidity("");
+        }
+        input.reportValidity();
+        if (!input.checkValidity()) {
+          break;
+        }
+      }
+    } else {
+      submission.name = document.querySelector("#name").value;
+      submission.email = document.querySelector("#email").value;
+      submission.phone = document.querySelector("#phone").value;
+      setSubmission({ ...submission, submitted: true });
+      updatePreviewData({
+        ...previewData,
+        name: submission.name,
+        email: submission.email,
+        phone: submission.phone,
+      });
+    }
   }
 
   function handleEdit(e) {
@@ -33,11 +58,17 @@ export function GralInfo({ previewData, updatePreviewData }) {
         <form action="#" className=" gral-info-form">
           <div>
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" defaultValue={submission.name} />
+            <input
+              required
+              type="text"
+              id="name"
+              defaultValue={submission.name}
+            />
           </div>
           <div>
             <label htmlFor="email">Email</label>
             <input
+              required
               type="email"
               name="email"
               id="email"
@@ -47,6 +78,7 @@ export function GralInfo({ previewData, updatePreviewData }) {
           <div>
             <label htmlFor="phone">Phone</label>
             <input
+              required
               type="number"
               name="phone"
               id="phone"
