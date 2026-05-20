@@ -22,6 +22,7 @@ export function PracticalExp({ previewData, updatePreviewData }) {
         <div>
           <label htmlFor="company-name">Company name</label>
           <input
+            required
             type="text"
             id="company-name"
             defaultValue={items[index].companyName}
@@ -30,6 +31,7 @@ export function PracticalExp({ previewData, updatePreviewData }) {
         <div>
           <label htmlFor="position-title">Position title</label>
           <input
+            required
             type="text"
             name="position-title"
             id="position-title"
@@ -39,6 +41,7 @@ export function PracticalExp({ previewData, updatePreviewData }) {
         <div>
           <label htmlFor="main-responsabilities">Main responsabilities</label>
           <textarea
+            required
             name="main-responsabilities"
             id="main-responsabilities"
             defaultValue={items[index].mainResponsabilities}
@@ -48,6 +51,7 @@ export function PracticalExp({ previewData, updatePreviewData }) {
           <div>
             <label htmlFor="work-start-date">Start date</label>
             <input
+              required
               type="date"
               name="work-start-date"
               id="work-start-date"
@@ -57,6 +61,7 @@ export function PracticalExp({ previewData, updatePreviewData }) {
           <div>
             <label htmlFor="work-end-date">End date</label>
             <input
+              required
               type="date"
               name="work-end-date"
               id="work-end-date"
@@ -115,25 +120,53 @@ export function PracticalExp({ previewData, updatePreviewData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const index = e.target.dataset.itemCount;
-    const newItems = getUpdatedItems(e, true, false, false, index);
+    if (!document.querySelector(".practical-exp-form").checkValidity()) {
+      const inputs = [
+        document.querySelector("#company-name"),
+        document.querySelector("#position-title"),
+        document.querySelector("#main-responsabilities"),
+        document.querySelector("#work-start-date"),
+        document.querySelector("#work-end-date"),
+      ];
 
-    newItems[index].companyName = document.querySelector("#company-name").value;
-    newItems[index].positionTitle =
-      document.querySelector("#position-title").value;
-    newItems[index].mainResponsabilities = document.querySelector(
-      "#main-responsabilities",
-    ).value;
-    newItems[index].startDate =
-      document.querySelector("#work-start-date").value;
-    newItems[index].endDate = document.querySelector("#work-end-date").value;
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
 
-    setItems([...newItems]);
+        if (input.validity.valueMissing) {
+          input.setCustomValidity("Please fill out this field");
+        } else if (input.validity.typeMismatch) {
+          console.log("mismatch");
+          input.setCustomValidity("Please adhere to the format");
+        } else {
+          input.setCustomValidity("");
+        }
+        input.reportValidity();
+        if (!input.checkValidity()) {
+          break;
+        }
+      }
+    } else {
+      const index = e.target.dataset.itemCount;
+      const newItems = getUpdatedItems(e, true, false, false, index);
 
-    updatePreviewData({
-      ...previewData,
-      practicalItems: newItems,
-    });
+      newItems[index].companyName =
+        document.querySelector("#company-name").value;
+      newItems[index].positionTitle =
+        document.querySelector("#position-title").value;
+      newItems[index].mainResponsabilities = document.querySelector(
+        "#main-responsabilities",
+      ).value;
+      newItems[index].startDate =
+        document.querySelector("#work-start-date").value;
+      newItems[index].endDate = document.querySelector("#work-end-date").value;
+
+      setItems([...newItems]);
+
+      updatePreviewData({
+        ...previewData,
+        practicalItems: newItems,
+      });
+    }
   }
 
   function handleEdit(e) {
