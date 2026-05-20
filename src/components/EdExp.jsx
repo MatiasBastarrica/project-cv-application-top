@@ -21,6 +21,7 @@ export function EdExp({ previewData, updatePreviewData }) {
         <div>
           <label htmlFor="school-name">School name</label>
           <input
+            required
             type="text"
             id="school-name"
             defaultValue={items[index].schoolName}
@@ -29,6 +30,7 @@ export function EdExp({ previewData, updatePreviewData }) {
         <div>
           <label htmlFor="title-of-study">Title of study</label>
           <input
+            required
             type="text"
             name="title-of-study"
             id="title-of-study"
@@ -39,6 +41,7 @@ export function EdExp({ previewData, updatePreviewData }) {
           <div>
             <label htmlFor="ed-start-date">Start date</label>
             <input
+              required
               type="date"
               name="ed-start-date"
               id="ed-start-date"
@@ -48,6 +51,7 @@ export function EdExp({ previewData, updatePreviewData }) {
           <div>
             <label htmlFor="ed-end-date">End date</label>
             <input
+              required
               type="date"
               name="ed-end-date"
               id="ed-end-date"
@@ -105,21 +109,49 @@ export function EdExp({ previewData, updatePreviewData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const index = e.target.dataset.itemCount;
-    const newItems = getUpdatedItems(e, true, false, false, index);
 
-    newItems[index].schoolName = document.querySelector("#school-name").value;
-    newItems[index].titleOfStudy =
-      document.querySelector("#title-of-study").value;
-    newItems[index].startDate = document.querySelector("#ed-start-date").value;
-    newItems[index].endDate = document.querySelector("#ed-end-date").value;
+    if (!document.querySelector(".ed-exp-form").checkValidity()) {
+      const inputs = [
+        document.querySelector("#school-name"),
+        document.querySelector("#title-of-study"),
+        document.querySelector("#ed-start-date"),
+        document.querySelector("#ed-end-date"),
+      ];
 
-    setItems([...newItems]);
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
 
-    updatePreviewData({
-      ...previewData,
-      educationItems: newItems,
-    });
+        if (input.validity.valueMissing) {
+          input.setCustomValidity("Please fill out this field");
+        } else if (input.validity.typeMismatch) {
+          console.log("mismatch");
+          input.setCustomValidity("Please adhere to the format");
+        } else {
+          input.setCustomValidity("");
+        }
+        input.reportValidity();
+        if (!input.checkValidity()) {
+          break;
+        }
+      }
+    } else {
+      const index = e.target.dataset.itemCount;
+      const newItems = getUpdatedItems(e, true, false, false, index);
+
+      newItems[index].schoolName = document.querySelector("#school-name").value;
+      newItems[index].titleOfStudy =
+        document.querySelector("#title-of-study").value;
+      newItems[index].startDate =
+        document.querySelector("#ed-start-date").value;
+      newItems[index].endDate = document.querySelector("#ed-end-date").value;
+
+      setItems([...newItems]);
+
+      updatePreviewData({
+        ...previewData,
+        educationItems: newItems,
+      });
+    }
   }
 
   function handleEdit(e) {
