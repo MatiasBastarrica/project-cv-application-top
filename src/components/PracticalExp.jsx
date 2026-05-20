@@ -184,6 +184,10 @@ export function PracticalExp({ previewData, updatePreviewData }) {
     const index = e.target.dataset.itemCount;
     const newItems = getUpdatedItems(e, null, false, true, index);
     setItems([...newItems]);
+    updatePreviewData({
+      ...previewData,
+      practicalItems: newItems,
+    });
   }
 
   function getItem(item, keyNum) {
