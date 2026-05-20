@@ -4,7 +4,7 @@
 
 ![](./src/assets/screenshot.png)
 
-[Live Preview]()
+[Live Preview](https://joyful-fenglisu-3a9afb.netlify.app/)
 
 ## Introduction
 
